@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Project } from "@/lib/projects";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 import { SITE_CONSTANTS } from "@/lib/constants";
+import Link from "next/link";
 
 interface CaseStudyHeroProps {
   project: Project;
@@ -12,77 +13,57 @@ interface CaseStudyHeroProps {
 
 export default function CaseStudyHero({ project }: CaseStudyHeroProps) {
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden bg-bg">
-      <div className={`${SITE_CONSTANTS.containerWidth} mx-auto px-6`}>
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          animate="animate"
-          className="space-y-12"
-        >
-          {/* Text Content */}
-          <div className="max-w-4xl space-y-8">
+    <section className="relative h-[60vh] min-h-[480px] w-full overflow-hidden bg-bg">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          priority
+          className="object-cover"
+        />
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className={`${SITE_CONSTANTS.containerWidth} mx-auto px-6 h-full relative z-10`}>
+        <div className="flex flex-col justify-end h-full pb-12 md:pb-20">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+            className="max-w-4xl space-y-6"
+          >
             <div className="space-y-4">
               <motion.span
                 variants={fadeUp}
-                className="font-sans text-xs uppercase tracking-[0.3em] text-accent block"
+                className="font-sans text-xs md:text-sm uppercase tracking-[0.3em] text-accent block"
               >
                 {project.industry}
               </motion.span>
               <motion.h1
                 variants={fadeUp}
-                className="font-display text-5xl md:text-8xl font-bold leading-[1.1] tracking-tight"
+                className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight text-text"
               >
                 {project.title}
               </motion.h1>
             </div>
 
-            <motion.p
-              variants={fadeUp}
-              className="font-sans text-text-warm text-lg md:text-xl leading-relaxed max-w-2xl"
-            >
-              {project.description}
-            </motion.p>
-          </div>
-
-          {/* Project Image */}
-          <motion.div
-            variants={fadeUp}
-            className="relative aspect-[21/9] w-full overflow-hidden border border-border"
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              priority
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg/40 to-transparent" />
+            <motion.div variants={fadeUp}>
+              <Link
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-accent hover:text-accent-soft transition-colors font-sans text-sm md:text-base tracking-wider group"
+              >
+                View Live Site
+                <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </motion.div>
           </motion.div>
-
-          {/* Project Meta */}
-          <motion.div
-            variants={fadeUp}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-border"
-          >
-            <div>
-              <span className="font-sans text-[10px] uppercase tracking-widest text-text-muted block mb-2">Service</span>
-              <p className="font-sans text-sm text-text">{project.package} Package</p>
-            </div>
-            <div>
-              <span className="font-sans text-[10px] uppercase tracking-widest text-text-muted block mb-2">Date</span>
-              <p className="font-sans text-sm text-text">2024</p>
-            </div>
-            <div>
-              <span className="font-sans text-[10px] uppercase tracking-widest text-text-muted block mb-2">Platform</span>
-              <p className="font-sans text-sm text-text">Web Experience</p>
-            </div>
-            <div>
-              <span className="font-sans text-[10px] uppercase tracking-widest text-text-muted block mb-2">Location</span>
-              <p className="font-sans text-sm text-text">Nigeria</p>
-            </div>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
