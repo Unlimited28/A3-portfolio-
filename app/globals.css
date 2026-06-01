@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #08080A;
+  --surface: #0F0F12;
+  --surface-alt: #141418;
+  --border: #1C1C22;
+  --accent: #B8975A;
+  --accent-soft: #D4B483;
+  --accent-dim: rgba(184, 151, 90, 0.12);
+  --text: #EDE8DF;
+  --text-muted: #6B6860;
+  --text-warm: #C9C2B4;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+}
+
+@layer utilities {
+  .tracking-widest {
+    letter-spacing: 0.15em;
+  }
+}
