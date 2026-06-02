@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+import { PAGE_METADATA } from "@/lib/metadata";
 import Hero from "@/components/home/Hero";
 import Marquee from "@/components/home/Marquee";
 import SelectedWork from "@/components/home/SelectedWork";
@@ -5,6 +7,8 @@ import About from "@/components/home/About";
 import Services from "@/components/home/Services";
 import Pricing from "@/components/home/Pricing";
 import ContactPreview from "@/components/home/ContactPreview";
+
+export const metadata: Metadata = PAGE_METADATA.home;
 
 export default function Home() {
   return (
